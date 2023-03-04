@@ -1,0 +1,94 @@
+<!--project：表示对当前工程进行配置和管理-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <!--modelVersion：固定结构，表示当前pom.xml所采用的标签结构-->
+  <modelVersion>4.0.0</modelVersion>
+
+  <!-- parent:给当前工作配置父工作 -->
+  <parent>
+    <groupId>com.lj</groupId>
+    <artifactId>demo2</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+
+  <!-- groupId：坐标向量之一，代表公司或者组织开发的某个项目 -->
+  <!-- artifactId：坐标向量之一代表项目下的某一个模块 -->
+  <!-- version：代表当前模块的版本 -->
+  <groupId>com.lj</groupId>
+  <artifactId>demo2</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+  <!--
+  packaging：打包方式，默认是jar方式，说明这是一个jar工程，
+  如果是war工程就是web工程，如果是pom说明这是用来管理其他工程的工程
+  -->
+  <packaging>jar</packaging>
+
+  <!-- name：当前工程名称 -->
+  <name>demo2</name>
+  <!-- url：maven官网地址，没用信息 -->
+  <url>http://maven.apache.org</url>
+
+  <!-- properties：在maven中定义属性值 -->
+  <properties>
+    <!-- 设置maven工程采用的jdk版本 -->
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <!--  在构建过程中读取源码使用的字符集  -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <!-- dependencies:用来配置具体依赖信息,可以包含多个dependency标签 -->
+  <dependencies>
+    <!--  dependency:配置一个具体的依赖信息,通过坐标信息导入  -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <!-- scope:配置当前依赖的范围 -->
+      <scope>test</scope>
+      <!-- exclusions:排除依赖 -->
+      <exclusions>
+        <!-- exclusions:排除依赖的具体信息 -->
+        <exclusion>
+          <!-- groupId,artifactId:需要排除的依赖坐标,不需要写版本信息 -->
+          <groupId>commons-logging</groupId>
+          <artifactId>commons-logging</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+  </dependencies>
+<!-- dependencyManagement:父工程依赖管理标签 -->
+<dependencyManagement>
+  <!-- dependencies:父工程依赖管理配置 -->
+  <dependencies>
+    <!-- dependency:父工程依赖管理详细配置,可以配置多个 -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <version>4.2.2.RELEASE</version>
+    </dependency>
+  </dependencies>
+</dependencyManagement>
+  <!-- build:告诉maven要进行定制构建行为 -->
+  <build>
+    <!-- plugins:定制时需要用到的插件 -->
+    <plugins>
+      <!-- plugin:定制时需要用到的插件详情 -->
+      <plugin>
+        <!-- 插件的坐标 -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.1</version>
+        <!--configuration: 配置maven-compiler-plugin插件 -->
+        <configuration>
+          <!-- 具体配置信息 -->
+          <source>1.8</source>
+          <target>1.8</target>
+          <encoding>UTF-8</encoding>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
